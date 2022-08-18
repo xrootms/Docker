@@ -1,0 +1,13 @@
+vi Dockerfile
+
+FROM ubuntu:18.04
+LABEL name="saif eraqi"
+LABEL email="saif@gmail.com"
+ENV NAME saif
+ENV PASS passwd11
+WORKDIR /tmp
+RUN apt-get update && apt-get install -y openssh-server && apt-get install -y python
+RUN useradd -d /home/saif -g root -G sudo -m -p $(echo "$PASS" | openssl passwd -1 -stdin) $ NAME
+USER $NAME
+RUN mkdir -p /tmp/project
+COPY testproject /tmp/project
